@@ -5,7 +5,7 @@ const url = require("url");
 let win;
 
 function createWindow() {
-	win = new BrowserWindow();
+	win = new BrowserWindow({ frame: false });
 
 	win.loadURL(url.format({
 		pathname: path.join(__dirname, 'src/index.html'),
@@ -16,6 +16,7 @@ function createWindow() {
 	win.setBackgroundColor("#161616");
 	win.setTitle("CIDE");
 
+	// win.setMenu(null);
 	win.setMinimumSize(800, 600);
 	win.setResizable(true);
 	win.maximize();
