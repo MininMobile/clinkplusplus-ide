@@ -1,0 +1,22 @@
+{
+  "name": "clinkplusplus-ide",
+  "version": "1.0.0",
+  "description": "An IDE for the language that makes you cry, it happens.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MininMobile/clinkplusplus-ide.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MininMobile/clinkplusplus-ide/issues"
+  },
+  "homepage": "https://github.com/MininMobile/clinkplusplus-ide#readme",
+  "dependencies": {
+    "electron": "^2.0.8"
+  }
+}
