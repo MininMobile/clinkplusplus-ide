@@ -19,6 +19,21 @@ body {
 	display: flex;
 }
 
+.button-small {
+	height: 1.5em;
+	padding: 0 0.4em;
+	font-size: 0.9em;
+	background-color: rgba(255, 255, 255, 0);
+	display: -webkit-box;
+	-webkit-box-align: center;
+	cursor: default;
+	transition: background-color 0.1s;
+}
+
+.button-small:hover {
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
 .wrapper {
 	flex: 1;
 	display: flex;
@@ -26,7 +41,7 @@ body {
 }
 
 .wrapper > .titlebar {
-	height: 47px;
+	height: 48px;
 	background: var(--color-secondary);
 	display: flex;
 	flex-direction: column;
@@ -76,5 +91,10 @@ body {
 
 .titlebar > .menu {
 	height: 20px;
-	flex: 1;
+	margin-top: 1px;
+}
+
+.titlebar > .menu > .menu-item {
+	height: 20px;
+	display: -webkit-inline-box;
 }
