@@ -5,7 +5,15 @@ const url = require("url");
 let win;
 
 function createWindow() {
-	win = new BrowserWindow({ frame: false });
+	win = new BrowserWindow({
+		icon: path.join(__dirname, 'src/img/icon-128.png'),
+		minWidth: 800,
+		minHeight: 600,
+		resizable: true,
+		title: "CIDE",
+		backgroundColor: "#161616",
+		frame: false
+	});
 
 	win.loadURL(url.format({
 		pathname: path.join(__dirname, 'src/index.html'),
@@ -13,14 +21,9 @@ function createWindow() {
 		slashes: true
 	}));
 
-	win.setBackgroundColor("#161616");
-	win.setTitle("CIDE");
-
 	// win.setMenu(null);
-	win.setMinimumSize(800, 600);
-	win.setResizable(true);
-	win.maximize();
 
+	win.maximize();
 	win.focus();
 
 	win.on("closed", app.quit);
