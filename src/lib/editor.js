@@ -5,7 +5,8 @@ const EditorEmitter = new class extends EventEmitter {}();
 module.exports = exports = {
 	workspace: "Welcome",
 	workspaceid: -1,
-	workspacefiles: { },
+	workspacedir: "",
+	workspacefiles: [ ],
 	openfiles: [ "cide:Welcome" ],
 	on: EditorEmitter.on,
 	emit: EditorEmitter.emit

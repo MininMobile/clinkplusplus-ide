@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/MininMobile/clinkplusplus-ide#readme",
   "dependencies": {
-    "electron": "^2.0.8"
+    "electron": "^2.0.8",
+    "monaco-editor": "^0.14.3"
   }
 }

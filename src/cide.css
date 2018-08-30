@@ -64,6 +64,21 @@ body {
 	flex-direction: column;
 }
 
+.wrapper > .content {
+	flex: 1;
+	display: flex;
+}
+
+.wrapper > .content > .sidebar {
+	background: var(--color-secondary);
+}
+
+.wrapper > .content > .container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
 .wrapper > .titlebar {
 	height: 48px;
 	background: var(--color-secondary);
