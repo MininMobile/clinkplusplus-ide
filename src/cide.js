@@ -10,7 +10,7 @@ const components = {
 };
 
 {
-	components.minimizeApp.onclick = w.minimize;
+	components.minimizeApp.onclick = () => w.minimize();
 	components.maximizeApp.onclick = () => {
 		if (w.isMaximized()) {
 			components.maximizeApp.classList.add("button-maximize");
@@ -22,7 +22,7 @@ const components = {
 			w.maximize();
 		}
 	};
-	components.closeApp.onclick = window.close;
+	components.closeApp.onclick = () => window.close();
 }
 
 generateMenu({
