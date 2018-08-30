@@ -1,6 +1,7 @@
 const remote = require("electron").remote;
 const w = remote.getCurrentWindow();
-const application = { name: "CIDE" }; // replace with require("./lib/application") soon pls
+const application = require("./lib/application");
+const editor = require("./lib/editor");
 const components = {
 	title: document.getElementById("title"),
 	altmenu: document.getElementById("altmenu"),
@@ -11,17 +12,7 @@ const components = {
 
 {
 	components.minimizeApp.onclick = () => w.minimize();
-	components.maximizeApp.onclick = () => {
-		if (w.isMaximized()) {
-			components.maximizeApp.classList.add("button-maximize");
-			components.maximizeApp.classList.remove("button-maximized");
-			w.unmaximize();
-		} else {
-			components.maximizeApp.classList.add("button-maximized");
-			components.maximizeApp.classList.remove("button-maximize");
-			w.maximize();
-		}
-	};
+	components.maximizeApp.onclick = () => toggleMaximize();
 	components.closeApp.onclick = () => window.close();
 }
 
@@ -33,11 +24,11 @@ generateMenu({
 	Help: undefined,
 });
 
-setTitle(`Welcome - ${application.name}`);
+setTitle(editor.workspace);
 
 function setTitle(title) {
-	document.title = title;
-	components.title.innerText = title;
+	document.title = `${title} - ${application.name}`;
+	components.title.innerText = `${title} - ${application.name}`;
 }
 
 function generateMenu(menu) {
@@ -51,4 +42,16 @@ function generateMenu(menu) {
 
 		components.altmenu.appendChild(button);
 	});
+}
+
+function toggleMaximize() {
+	if (w.isMaximized()) {
+		components.maximizeApp.classList.add("button-maximize");
+		components.maximizeApp.classList.remove("button-maximized");
+		w.unmaximize();
+	} else {
+		components.maximizeApp.classList.add("button-maximized");
+		components.maximizeApp.classList.remove("button-maximize");
+		w.maximize();
+	}
 }
