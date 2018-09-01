@@ -2,6 +2,7 @@
 	--color-primary: #212121;
 	--color-secondary: #161616;
 	--color-font-focus: #ffffff;
+	--color-font-disabled: #999999;
 	--color-font-primary: #cdcdcd;
 	--color-font-secondary: #bbb;
 }
@@ -34,6 +35,7 @@ html, body {
 	height: 100vh;
 	margin: 0;
 	padding: 0;
+	overflow: hidden;
 	font-family: OpenSans, sans-serif;
 	font-size: 1em;
 	background: var(--color-primary);
@@ -48,11 +50,40 @@ body {
 a {
 	color: var(--color-font-secondary);
 	transition: color 0.1s;
+	cursor: pointer;
 }
 
 a:hover {
 	color: var(--color-font-focus);
+}
+
+.filelist {
+	padding: 2vh 2vw;
+	font-size: 0.9em;
+}
+
+.filelist.big {
+	font-size: 1em;
+}
+
+.filelist * {
+	color: var(--color-font-primary);
+	transition: color 0.1s;
 	cursor: pointer;
+}
+
+.filelist *[disabled] {
+	color: var(--color-font-disabled) !important;
+	cursor: not-allowed;
+}
+
+.filelist *:hover {
+	color: var(--color-font-focus);
+}
+
+.filelist-header {
+	padding: 1vh 1vw;
+	font-size: 0.8em;
 }
 
 .button-small {
@@ -88,6 +119,28 @@ a:hover {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
+}
+
+.wrapper > .content > .container > .editor {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	display: flex;
+}
+
+.wrapper > .content > .sidebar {
+	padding-right: 4px;
+	display: flex;
+}
+
+.sidebar > .content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.sidebar > .content > .filelist {
+	flex: 1;
 }
 
 .wrapper > .titlebar {

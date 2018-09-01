@@ -18,6 +18,10 @@ const components = {
 	});
 
 	application.on("load", () => {
+		{ // shortcuts
+			// [GET SHORTCUT CONFIG AND ASSIGN ACTIONS]
+		}
+
 		{ // action buttons
 			components.minimizeApp.onclick = () => w.minimize();
 			components.maximizeApp.onclick = () => toggleMaximize();
@@ -52,12 +56,30 @@ function updateWorkspace() {
 
 function updateEditor() {
 	let protocol = editor.open.split(":")[0];
-	let location = editor.open.split(":"); location.shift(); location.join(":");
+	let location = editor.open.split(":"); location.shift(); location = location.join(":");
 	components.editor.innerHTML = "";
 
 	switch (protocol) {
 		case "cide": {
+			switch (location) {
+				case "Welcome": {
+					components.editor.innerHTML = `
+						<div style="padding: 10vh 10vw; flex: 1; display: flex; flex-direction: column;">
+							<div style="font-size: 3em; font-weight: bold; color: var(--color-font-primary);">Welcome!</div>
+							<div style="font-size: 0.8em; color: var(--color-font-secondary);">CIDE, Clink++ Integrated Development Enviroment</div>
+							<div class="filelist no-icons big">
+								<div>New Console App...</div>
+								<div disabled>New Forms App...</div>
+								<div>Open Project...</div>
+							</div>
+						</div>
+					`;
+				} break;
 
+				default: {
+					components.editor.innerHTML = utilERRORTEMPLATE("404", "File Not Found; Internal Error");
+				}
+			}
 		} break;
 
 		case "file": {
@@ -100,7 +122,7 @@ function utilERRORTEMPLATE(code = "404", details = "Missing File") {
 		<div style="padding: 10vh 10vw; flex: 1; display: flex; flex-direction: column;">
 			<div style="font-size: 3em; font-weight: bold; color: #f44336;">error ${code}</div>
 			<div style="font-size: 1em; color: var(--color-font-primary);">${details.toLowerCase()}</div>
-			<div style="font-size: 1em; color: var(--color-font-secondary);">if you do not know how this error occured, ask on the <a href="https://${application.repo}/issues">GitHub issues page</a>.</div>
+			<div style="font-size: 0.8em; color: var(--color-font-secondary);">if you do not know how this error occured, ask on the <a href="https://${application.repo}/issues">GitHub issues page</a>.</div>
 		</div>
 	`;
 }
