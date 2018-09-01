@@ -1,4 +1,3 @@
-const monaco = require("monaco-editor");
 const remote = require("electron").remote;
 const w = remote.getCurrentWindow();
 const application = require("./lib/application");
@@ -47,8 +46,28 @@ function setTitle(title) {
 function updateWorkspace() {
 	// update variables();
 	// update sidebar();
-	// update editor();
+	updateEditor();
 	setTitle(editor.workspace);
+}
+
+function updateEditor() {
+	let protocol = editor.open.split(":")[0];
+	let location = editor.open.split(":"); location.shift(); location.join(":");
+	components.editor.innerHTML = "";
+
+	switch (protocol) {
+		case "cide": {
+
+		} break;
+
+		case "file": {
+
+		} break;
+
+		default: {
+			components.editor.innerHTML = utilERRORTEMPLATE("-1", "Bad Request; Invalid Protocol");
+		}
+	}
 }
 
 function generateMenu(menu) {
@@ -74,6 +93,16 @@ function toggleMaximize() {
 		components.maximizeApp.classList.remove("button-maximize");
 		w.maximize();
 	}
+}
+
+function utilERRORTEMPLATE(code = "404", details = "Missing File") {
+	return `
+		<div style="padding: 10vh 10vw; flex: 1; display: flex; flex-direction: column;">
+			<div style="font-size: 3em; font-weight: bold; color: #f44336;">error ${code}</div>
+			<div style="font-size: 1em; color: var(--color-font-primary);">${details.toLowerCase()}</div>
+			<div style="font-size: 1em; color: var(--color-font-secondary);">if you do not know how this error occured, ask on the <a href="https://${application.repo}/issues">GitHub issues page</a>.</div>
+		</div>
+	`;
 }
 
 // begin

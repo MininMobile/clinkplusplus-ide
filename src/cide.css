@@ -1,6 +1,7 @@
 :root {
 	--color-primary: #212121;
 	--color-secondary: #161616;
+	--color-font-focus: #ffffff;
 	--color-font-primary: #cdcdcd;
 	--color-font-secondary: #bbb;
 }
@@ -42,6 +43,16 @@ html, body {
 
 body {
 	display: flex;
+}
+
+a {
+	color: var(--color-font-secondary);
+	transition: color 0.1s;
+}
+
+a:hover {
+	color: var(--color-font-focus);
+	cursor: pointer;
 }
 
 .button-small {

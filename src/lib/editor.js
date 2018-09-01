@@ -7,7 +7,7 @@ module.exports = exports = {
 	workspaceid: -1,
 	workspacedir: "",
 	workspacefiles: [ ],
-	openfiles: [ "cide:Welcome" ],
+	open: "cide:Welcome",
 	on: EditorEmitter.on,
 	emit: EditorEmitter.emit
 };
