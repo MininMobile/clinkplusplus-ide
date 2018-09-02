@@ -68,6 +68,7 @@ function updateWorkspace() {
 }
 
 function updateSidebar() {
+	if (editor.workspaceDir != "") components.sidebar.innerHTML = generateFilelist(editor.workspaceDir);
 	components.sidebarTitle.onclick = () => shell.openItem(editor.workspaceDir);
 	components.sidebarTitle.innerText = editor.workspaceName;
 }
@@ -130,6 +131,22 @@ function updateDialog() {
 	} else {
 		components.dialogContainer.classList.remove("hidden");
 	}
+}
+
+function generateFilelist(p) {
+	const path = p.endsWith("\\") ? p : p + "\\";
+	let files = "";
+	let folders = "";
+
+	fs.readdirSync(path).forEach((f) => {
+		let stats = fs.statSync(path + f);
+		if (stats.isFile())
+			files += `<div>${f}</div>`;
+		else
+			folders += `<div class="folder">${f}</div>`;
+	});
+
+	return `${folders}\n${files}`;
 }
 
 function generateMenu(menu) {

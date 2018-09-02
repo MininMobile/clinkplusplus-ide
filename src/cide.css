@@ -94,6 +94,8 @@ a:hover {
 	display: block;
 }
 
+.filelist:not(.no-icons) *.folder::before { -webkit-mask: url("img/files/folder.svg") center / cover; mask: url("img/files/folder.svg") center / cover; }
+
 .filelist-header {
 	padding: 1vh 1vw;
 	color: var(--color-font-primary);
