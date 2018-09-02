@@ -140,9 +140,12 @@ function generateFilelist(p) {
 
 	fs.readdirSync(path).forEach((f) => {
 		let stats = fs.statSync(path + f);
-		if (stats.isFile())
-			files += `<div>${f}</div>`;
-		else
+		if (stats.isFile()) {
+			let extension = f.split(".")[f.split(".").length - 1]; if (extension.includes(" ")) extension = "";
+			files += `<div onclick='editor.open = "file:${path.replace(/\\/g, "\\\\")}${f}"; updateEditor()'`;
+			files += ` class="${extension == "" ? "" : "file-extension-" + extension}"`
+			files += `>${f}</div>`;
+		} else
 			folders += `<div class="folder">${f}</div>`;
 	});
 

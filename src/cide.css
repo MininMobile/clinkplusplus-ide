@@ -94,7 +94,8 @@ a:hover {
 	display: block;
 }
 
-.filelist:not(.no-icons) *.folder::before { -webkit-mask: url("img/files/folder.svg") center / cover; mask: url("img/files/folder.svg") center / cover; }
+.filelist:not(.no-icons) *.folder::before { -webkit-mask: url("img/files/folder.svg") center / cover; }
+.filelist:not(.no-icons) *.file-extension-clipp::before { -webkit-mask: url("img/files/lang.clipp.svg") center / cover; background: #19b873; }
 
 .filelist-header {
 	padding: 1vh 1vw;
