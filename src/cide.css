@@ -57,6 +57,10 @@ a:hover {
 	color: var(--color-font-focus);
 }
 
+.hidden {
+	display: none !important;
+}
+
 .filelist {
 	padding: 0 2vw;
 	font-size: 1em;
@@ -86,6 +90,7 @@ a:hover {
 	margin-right: 3px;
 	background: currentColor;
 	-webkit-mask: url("img/files/generic.svg") center / cover;
+			mask: url("img/files/generic.svg") center / cover;
 	display: block;
 }
 
@@ -113,6 +118,31 @@ a:hover {
 
 .button-small:hover {
 	background-color: rgba(255, 255, 255, 0.2);
+}
+
+.modal {
+	width: 100%;
+	height: calc(100% - 48px);
+	z-index: 100;
+	position: absolute;
+	display: flex;
+}
+
+.modal > *:first-child {
+	margin: 10vh 10vw;
+	flex: 1;
+}
+
+.modal > *:first-child::before {
+	content: "";
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.6);
+	top: 0;
+	left: 0;
+	z-index: -100;
+	position: absolute;
+	display: block;
 }
 
 .wrapper {

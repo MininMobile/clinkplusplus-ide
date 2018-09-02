@@ -1,4 +1,6 @@
+const fs = require("fs");
 const remote = require("electron").remote;
+const { dialog } = remote;
 const w = remote.getCurrentWindow();
 const application = require("./lib/application");
 const editor = require("./lib/editor");
@@ -10,10 +12,17 @@ const components = {
 	sidebar: document.getElementById("sidebar-content"),
 	editor: document.getElementById("editor"),
 	panel: document.getElementById("panel"),
+	dialogContainer: document.getElementById("dialog"),
 	minimizeApp: document.getElementById("action-minimize"),
 	maximizeApp: document.getElementById("action-maximize"),
 	closeApp: document.getElementById("action-close")
 };
+
+const dialogs = {
+	newApp: {
+		console() { /* placeholder function */ }
+	}
+}
 
 { // create event handlers
 	editor.on("load", () => {
@@ -54,6 +63,7 @@ function updateWorkspace() {
 	// update variables();
 	updateSidebar();
 	updateEditor();
+	updateDialog();
 	setTitle(editor.workspace);
 }
 
@@ -75,9 +85,9 @@ function updateEditor() {
 							<div style="font-size: 3em; font-weight: bold; color: var(--color-font-primary);">Welcome!</div>
 							<div style="font-size: 0.8em; color: var(--color-font-secondary);">CIDE, Clink++ Integrated Development Enviroment</div>
 							<div class="filelist no-icons">
-								<div>New Console App...</div>
+								<div onclick="showDialog(dialogs.newApp.console())">New Console App...</div>
 								<div disabled>New Forms App...</div>
-								<div>Open Project...</div>
+								<div onclick="openProject()">Open Project...</div>
 							</div>
 						</div>
 					`;
@@ -96,6 +106,24 @@ function updateEditor() {
 		default: {
 			components.editor.innerHTML = utilERRORTEMPLATE("-1", "Bad Request; Invalid Protocol");
 		}
+	}
+}
+
+function showDialog(dialog) {
+	if (dialog != "") components.dialogContainer.innerHTML = dialog;
+	updateDialog();
+}
+
+function hideDialog() {
+	components.dialogContainer.innerHTML = "";
+	updateDialog();
+}
+
+function updateDialog() {
+	if (components.dialogContainer.innerHTML == "") {
+		components.dialogContainer.classList.add("hidden");
+	} else {
+		components.dialogContainer.classList.remove("hidden");
 	}
 }
 
@@ -121,6 +149,16 @@ function toggleMaximize() {
 		components.maximizeApp.classList.add("button-maximized");
 		components.maximizeApp.classList.remove("button-maximize");
 		w.maximize();
+	}
+}
+
+function utilDIALOGTEMPLATE(body) {
+	if (typeof body == "string") {
+		return `<div class="dialog>${body}</div>`;
+	} else {
+		let outer = document.createElement("div");
+		outer.classList.add("dialog");
+		outer.appendChild(body);
 	}
 }
 
