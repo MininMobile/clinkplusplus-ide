@@ -78,6 +78,7 @@ function updateEditor() {
 	let location = editor.open.split(":"); location.shift(); location = location.join(":");
 	components.editor.innerHTML = "";
 
+	switch (protocol) {
 		case "cide": {
 			switch (location) {
 				case "Welcome": {

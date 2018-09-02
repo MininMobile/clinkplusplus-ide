@@ -7,6 +7,33 @@
 	--color-font-secondary: #bbb;
 }
 
+/*
+            _     _                                                        
+   __ _  __| | __| |  _ __ ___   ___  _ __   ___  ___ _ __   __ _  ___ ___ 
+  / _` |/ _` |/ _` | | '_ ` _ \ / _ \| '_ \ / _ \/ __| '_ \ / _` |/ __/ _ \
+ | (_| | (_| | (_| | | | | | | | (_) | | | | (_) \__ \ |_) | (_| | (_|  __/
+  \__,_|\__,_|\__,_| |_| |_| |_|\___/|_| |_|\___/|___/ .__/ \__,_|\___\___|
+   __             _           _                       |_|                   
+  / _| ___  _ __ | |_   _ __ | | ___  __ _ ___  ___                         
+ | |_ / _ \| '_ \| __| | '_ \| |/ _ \/ _` / __|/ _ \                        
+ |  _| (_) | | | | |_  | |_) | |  __/ (_| \__ \  __/                        
+ |_|  \___/|_| |_|\__| | .__/|_|\___|\__,_|___/\___|                        
+                       |_|                                                  
+
+mfw the text is unreadable
+
+@font-face {
+	font-family: FiraCode;
+	src: url("font/FiraCode-Regular.ttf");
+}
+
+@font-face {
+	font-family: FiraCode;
+	src: url("font/FiraCode-Italic.ttf");
+	font-style: italic;
+}
+*/
+
 @font-face {
 	font-family: OpenSans;
 	src: url("font/OpenSans-Regular.ttf");
