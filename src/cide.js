@@ -1,6 +1,6 @@
 const fs = require("fs");
 const remote = require("electron").remote;
-const { dialog } = remote;
+const { dialog, shell } = remote;
 const w = remote.getCurrentWindow();
 const application = require("./lib/application");
 const editor = require("./lib/editor");
@@ -60,15 +60,16 @@ function setTitle(title) {
 }
 
 function updateWorkspace() {
-	// update variables();
+	editor.workspaceName = editor.workspaceDir != "" ? editor.workspaceDir.split("\\")[editor.workspaceDir.split("\\").length - 1] : editor.workspaceName;
 	updateSidebar();
 	updateEditor();
 	updateDialog();
-	setTitle(editor.workspace);
+	setTitle(editor.workspaceName);
 }
 
 function updateSidebar() {
-	components.sidebarTitle.innerText = editor.workspace;
+	components.sidebarTitle.onclick = () => shell.openItem(editor.workspaceDir);
+	components.sidebarTitle.innerText = editor.workspaceName;
 }
 
 function updateEditor() {
@@ -91,6 +92,10 @@ function updateEditor() {
 							</div>
 						</div>
 					`;
+				} break;
+
+				case "blank": {
+					components.editor.innerHTML = ``;
 				} break;
 
 				default: {
@@ -149,6 +154,34 @@ function toggleMaximize() {
 		components.maximizeApp.classList.add("button-maximized");
 		components.maximizeApp.classList.remove("button-maximize");
 		w.maximize();
+	}
+}
+
+function openProject(p = undefined) {
+	if (p) {
+		open(p);
+	} else {
+		dialog.showOpenDialog({
+			title: "Select Project/Directory",
+			message: "Select Project/Directory", // macOS
+			properties: [
+				"openDirectory",
+				"createDirectory" // macOS
+			]
+		}, (path) => {
+			if (!path) return;
+			open(path[0]);
+		});
+	}
+
+	function open(path) {
+		if (fs.existsSync(path)) {
+			editor.workspaceDir = path;
+			editor.open = "cide:blank";
+			updateWorkspace();
+		} else {
+			console.error("oh no the thing doesn't do\nyou should really tell the user that it didn't\nmaybe in the form of a dialog\n\n...just a thought...");
+		}
 	}
 }
 
