@@ -78,7 +78,6 @@ function updateEditor() {
 	let location = editor.open.split(":"); location.shift(); location = location.join(":");
 	components.editor.innerHTML = "";
 
-	switch (protocol) {
 		case "cide": {
 			switch (location) {
 				case "Welcome": {
@@ -106,7 +105,19 @@ function updateEditor() {
 		} break;
 
 		case "file": {
+			components.editor.innerHTML = "";
 
+			let content = document.createElement("textarea");
+			content.value = fs.readFileSync(location, "utf-8");
+
+			content.style.background = "var(--color-primary)";
+			content.style.color = "var(--color-font-primary)";
+			content.style.margin = "0.5em";
+			content.style.flex = "1";
+			content.style.border = "none";
+			content.style.outline = "none";
+
+			components.editor.appendChild(content);
 		} break;
 
 		default: {
@@ -143,7 +154,7 @@ function generateFilelist(p) {
 		if (stats.isFile()) {
 			let extension = f.split(".")[f.split(".").length - 1]; if (extension.includes(" ")) extension = "";
 			files += `<div onclick='editor.open = "file:${path.replace(/\\/g, "\\\\")}${f}"; updateEditor()'`;
-			files += ` class="${extension == "" ? "" : "file-extension-" + extension}"`
+			files += ` class="${extension == "" ? "" : "file-extension-" + extension}"`;
 			files += `>${f}</div>`;
 		} else
 			folders += `<div class="folder">${f}</div>`;
