@@ -5,6 +5,9 @@ const editor = require("./lib/editor");
 const components = {
 	title: document.getElementById("title"),
 	altmenu: document.getElementById("altmenu"),
+	sidebarHandle: document.getElementById("sidebar"),
+	sidebarTitle: document.getElementById("sidebar-workspace"),
+	sidebar: document.getElementById("sidebar-content"),
 	editor: document.getElementById("editor"),
 	panel: document.getElementById("panel"),
 	minimizeApp: document.getElementById("action-minimize"),
@@ -49,9 +52,13 @@ function setTitle(title) {
 
 function updateWorkspace() {
 	// update variables();
-	// update sidebar();
+	updateSidebar();
 	updateEditor();
 	setTitle(editor.workspace);
+}
+
+function updateSidebar() {
+	components.sidebarTitle.innerText = editor.workspace;
 }
 
 function updateEditor() {
@@ -67,7 +74,7 @@ function updateEditor() {
 						<div style="padding: 10vh 10vw; flex: 1; display: flex; flex-direction: column;">
 							<div style="font-size: 3em; font-weight: bold; color: var(--color-font-primary);">Welcome!</div>
 							<div style="font-size: 0.8em; color: var(--color-font-secondary);">CIDE, Clink++ Integrated Development Enviroment</div>
-							<div class="filelist no-icons big">
+							<div class="filelist no-icons">
 								<div>New Console App...</div>
 								<div disabled>New Forms App...</div>
 								<div>Open Project...</div>
