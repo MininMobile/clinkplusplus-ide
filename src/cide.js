@@ -45,16 +45,6 @@ let saveTimeout;
 			components.maximizeApp.onclick = () => toggleMaximize();
 			components.closeApp.onclick = () => window.close();
 		}
-		
-		{ // init
-			generateMenu({
-				File: undefined,
-				Edit: undefined,
-				View: undefined,
-				Tools: undefined,
-				Help: undefined,
-			});
-		}
 
 		editor.emit("load");
 	});
@@ -70,6 +60,15 @@ function updateWorkspace() {
 	updateSidebar();
 	updateEditor();
 	updateDialog();
+	
+	generateMenu({
+		File: spawnContext,
+		Edit: spawnContext,
+		View: spawnContext,
+		Tools: spawnContext,
+		Help: spawnContext,
+	});
+
 	setTitle(editor.workspaceName);
 }
 
@@ -175,6 +174,10 @@ function generateFilelist(p) {
 	});
 
 	return `${folders}\n${files}`;
+}
+
+function spawnContext(menu) {
+	// spawn context menu at cursor position
 }
 
 function generateMenu(menu) {
