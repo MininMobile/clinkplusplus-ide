@@ -24,6 +24,8 @@ const dialogs = {
 	}
 }
 
+let saveTimeout;
+
 { // create event handlers
 	editor.on("load", () => {
 		updateWorkspace();
@@ -117,6 +119,13 @@ function updateEditor() {
 			content.style.flex = "1";
 			content.style.border = "none";
 			content.style.outline = "none";
+
+			content.oninput = () => {
+				clearTimeout(saveTimeout);
+				saveTimeout = setTimeout(() =>
+					fs.writeFile(editor.workspaceDir, content.value, (e) => editor.emit("error", "While Running Auto-Save", e))
+				, 500);
+			}
 
 			components.editor.appendChild(content);
 		} break;
