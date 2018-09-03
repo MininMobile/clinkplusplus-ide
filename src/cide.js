@@ -31,6 +31,10 @@ let saveTimeout;
 		updateWorkspace();
 	});
 
+	editor.on("error", (message, e) => {
+		console.error(`${message}\n\t${e}`);
+	});
+
 	application.on("load", () => {
 		{ // shortcuts
 			// [GET SHORTCUT CONFIG AND ASSIGN ACTIONS]
@@ -123,7 +127,7 @@ function updateEditor() {
 			content.oninput = () => {
 				clearTimeout(saveTimeout);
 				saveTimeout = setTimeout(() =>
-					fs.writeFile(editor.workspaceDir, content.value, (e) => editor.emit("error", "While Running Auto-Save", e))
+					fs.writeFile(location, content.value, (e) => { if (e) editor.emit("error", "While Running Auto-Save", e) })
 				, 500);
 			}
 
